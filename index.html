@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue"></script>
+    <title>Group Work Lessons</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="css/group-work.css">
+</head>
+<body>
+
+    <div id="app">
+        <div class="container">
+
+            <div class="card">
+                <div class="card-image" v-bind:style="{ 'background-image': 'url(' + lesson.image + ')' }"></div>
+                <div class="card-info">
+                    <div class="card-subject">{{ lesson.subject }}</div>
+                    <div class="card-spaces">Spaces left: {{ lesson.availableSpaces }}</div>
+                    <div class="card-location">{{ lesson.location }}</div>
+                    <div class="card-price">£{{ lesson.price / 100 }}</div>
+                    <button class="addToCart" v-on:click="addToCart" :disabled="isAvailable">Add to cart</button>
+                </div>
+            </div>
+           
+
+        </div>
+    </div>
+
+
+
+
+    <script>
+
+        let app = new Vue({
+            el: '#app',
+            data: {
+                cart: [],
+
+                lesson: {
+                    id: 1,
+                    subject: 'Music',
+                    location: 'London',
+                    image: 'img/music.jpg',
+                    price: 2000,
+                    availableSpaces: 5
+                }
+            },
+            methods: {
+                addToCart() {
+                    let spaces = this.lesson.availableSpaces;
+
+                    if(spaces <= 0) {
+                        alert("No available spaces");
+                    } else {
+                        this.cart.push(this.lesson.id);
+                        this.lesson.availableSpaces -= 1;
+                    }
+                }
+            },
+            computed: {
+                isAvailable() {
+                    return (this.lesson.availableSpaces > 0) ? false : true;
+                }
+            }
+        });
+
+    </script>
+    
+</body>
+</html>
