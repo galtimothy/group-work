@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/group-work.css">
 </head>
 <body>
-
+    
     <div id="app">
         <div class="container">
 
@@ -20,7 +20,7 @@
                     <div class="card-subject">{{ lesson.subject }}</div>
                     <div class="card-spaces">Spaces left: {{ lesson.availableSpaces }}</div>
                     <div class="card-location">{{ lesson.location }}</div>
-                    <div class="card-price">£{{ lesson.price / 100 }}</div>
+                    <div class="card-price">£{{ convertedPrice }}</div>
                     <button class="addToCart" v-on:click="addToCart" :disabled="isAvailable">Add to cart</button>
                 </div>
             </div>
@@ -60,6 +60,9 @@
             computed: {
                 isAvailable() {
                     return (this.lesson.availableSpaces > 0) ? false : true;
+                },
+                convertedPrice() {
+                    return (this.lesson.price/100).toFixed(2);
                 }
             }
         });
