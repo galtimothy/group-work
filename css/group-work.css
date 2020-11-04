@@ -81,3 +81,14 @@ body {
     margin-bottom: 30px;
     color: rgba(0,0,0,0.5);
 }
+
+.header {
+    height: 100px;
+    background: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.7);
+}
